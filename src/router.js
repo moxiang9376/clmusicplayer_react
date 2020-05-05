@@ -1,19 +1,17 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  withRouter,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./views/home/home";
-import Tabbar from "./component/tabbar/tabbar";
 import MusicList from "./views/musicList/musicList";
+import Tabbar from "./component/tabbar/tabbar";
+import HeadNav from "./component/headNav/headNav";
+import AudioPlayer from "./component/audioPlayer/audioPlayer"
 
 const BasicRoute = () => (
   <Router>
+    <HeadNav></HeadNav>
     <Route exact path="/" component={Home} />
     <Route exact path="/musicList" component={MusicList} />
+    <AudioPlayer></AudioPlayer>
     <Tabbar></Tabbar>
   </Router>
 );

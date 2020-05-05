@@ -1,19 +1,12 @@
 import React from "react";
 import "./home.css";
-import common from "../../assets/js/common.js";
 import axios from "axios";
+import common from "../../assets/js/common";
 export default class Home extends React.Component {
   render() {
     return (
       <div className="home">
-        <div
-          className={
-            true === this.state.searchBoxCheck ? "searchBoxM" : "searchBoxT"
-          }
-        >
-          <p className="tittle">
-            云听
-          </p>
+        <div className="searchBoxT">
           <input onChange={this.getSearch}></input>
           <div onClick={this.search}>search</div>
         </div>
@@ -52,7 +45,6 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       keyWord: "", //搜索关键词
-      searchBoxCheck: false, //搜索框样式控制
       songUrl: "", //音乐播放地址
       songArr: [
         //音乐搜索结果数组
@@ -66,6 +58,12 @@ export default class Home extends React.Component {
     };
   }
 
+  componentDidMount() {
+    common.searchSong(null, "周杰伦", 1).then((res) => {
+      console.log(res);
+    });
+  }
+
   //JS事件
   //获取搜索参数
   getSearch = (e) => {
@@ -73,21 +71,12 @@ export default class Home extends React.Component {
       keyWord: e.target.value,
     });
   };
-  //search搜索
+
+  //搜索关键词
   search = () => {
-    console.log(this.state.keyWord);
-    //调用公共函数
-    common
-      .searchSong(this.state.keyWord)
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          songArr: res,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    common.searchSong(null, this.state.keyWord, 1).then((res) => {
+      console.log(res);
+    });
   };
 
   //播放音乐

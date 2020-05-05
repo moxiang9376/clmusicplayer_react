@@ -1,5 +1,5 @@
 import React from "react";
-import "./tabbar.css";
+import "./tabbar.min.css";
 import { withRouter } from "react-router-dom";
 class tabbar extends React.Component {
   render() {
@@ -8,7 +8,7 @@ class tabbar extends React.Component {
         {this.state.tabbarList.map((item, index) => {
           return (
             <div
-              className="tabbar_list"
+              className={item.style ? "color_green" : "tabbar_list"}
               onClick={() => this.changePath(item.path)}
               key={index}
             >
@@ -26,15 +26,18 @@ class tabbar extends React.Component {
       tabbarList: [
         {
           name: "首页",
-          path: "/home",
+          path: "/",
+          style: true,
         },
         {
           name: "列表",
           path: "/musicList",
+          style: false,
         },
         {
           name: "我的",
           path: "",
+          style: false,
         },
       ],
     };
@@ -42,6 +45,14 @@ class tabbar extends React.Component {
   changePath = (path) => {
     console.log(path);
     this.props.history.push(path);
+    this.state.tabbarList.forEach((item, index) => {
+      if (item.path != path) {
+        item.style = false;
+      } else {
+        item.style = true;
+      }
+    });
+    console.log(this.state.tabbarList);
   };
 }
 
