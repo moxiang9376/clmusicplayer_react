@@ -1,8 +1,8 @@
 import React from "react";
-import "./home.css";
+// import "./home.css";
 import common from "../../assets/js/common.js";
 import axios from "axios";
-export default class Home extends React.Component {
+export default class MusicList extends React.Component {
   render() {
     return (
       <div className="home">
@@ -11,9 +11,7 @@ export default class Home extends React.Component {
             true === this.state.searchBoxCheck ? "searchBoxM" : "searchBoxT"
           }
         >
-          <p className="tittle">
-            云听
-          </p>
+          <p className="tittle">云听</p>
           <input onChange={this.getSearch}></input>
           <div onClick={this.search}>search</div>
         </div>
